@@ -4,7 +4,7 @@
 <plist version="1.0">
 <dict>
     <key>Label</key>
-    <string>io.stoscanini.dark-mode-notifier</string>
+    <string>me.toscanini.dark-mode-notifier</string>
 
     <key>KeepAlive</key>
     <true/>
@@ -19,8 +19,7 @@
     <array>
        <string>dark-mode-notifier</string>
        <string>zsh</string>
-       <string>-c</string>
-       <string>autoSwitchAlacrittyTheme</string>
+       <string>/Users/stoscanini/dev/personal/dotfiles/zsh/change-theme.zsh</string>
     </array>
 </dict>
 </plist>

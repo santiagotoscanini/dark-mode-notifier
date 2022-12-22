@@ -2,16 +2,21 @@
 
 Heavily inspired by [dark-mode-notify](https://github.com/bouk/dark-mode-notify)
 
-To compile `dark-mode-notifier.swift` run:
+### Instalation
+
+To install the program run:
 
 ```shell
-swiftc dark-mode-notifier.swift -o /usr/local/bin/dark-mode-notifier
+sudo make install
 ```
 
-We can test the script running:
+We can test it with:
+
+```shell
+/usr/local/bin/dark-mode-notifier zsh -c 'echo test'
 ```
-dark-mode-notifier zsh $XDG_CONFIG_HOME/zsh/alacritty-theme.zsh
-```
+
+### Keep it running
 
 To make it to run automatically, copy the file `dark-mode-notifier.plist` to `~/Library/LaunchAgents`.
 ```
