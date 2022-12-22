@@ -6,7 +6,13 @@ func shell(_ args: [String]) -> Int32 {
     // Run another program as a subprocess.
     // https://developer.apple.com/documentation/foundation/process
     let task = Process()
+    var env = ProcessInfo.processInfo.environment
 
+    // Set the environment variable for the subprocess.
+    let isDark = UserDefaults.standard.string(forKey: "AppleInterfaceStyle") == "Dark"
+    env["DARKMODE"] = isDark ? "1" : "0"
+
+    task.environment = env
     task.launchPath = "/usr/bin/env"
     task.arguments = args
     task.standardError = FileHandle.standardError
@@ -28,6 +34,15 @@ shell(args)
 DistributedNotificationCenter.default.addObserver(
     // Just listen for `AppleInterfaceThemeChangedNotification` notification.
     forName: Notification.Name("AppleInterfaceThemeChangedNotification"),
+    object: nil,
+    queue: nil
+) { (notification) in shell(args) }
+
+// https://developer.apple.com/documentation/appkit/nsworkspace
+NSWorkspace.shared.notificationCenter.addObserver(
+    // A notification that the workspace posts when the device wakes from sleep.
+    // https://developer.apple.com/documentation/appkit/nsworkspace/1530973-didwakenotification
+    forName: NSWorkspace.didWakeNotification,
     object: nil,
     queue: nil
 ) { (notification) in shell(args) }
