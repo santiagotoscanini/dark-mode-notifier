@@ -5,19 +5,15 @@
 <dict>
     <key>Label</key>
     <string>me.toscanini.dark-mode-notifier</string>
-
     <key>KeepAlive</key>
     <true/>
-
     <key>StandardErrorPath</key>
     <string>/Users/stoscanini/.dark-mode-notifier-stderr.log</string>
-
     <key>StandardOutPath</key>
     <string>/Users/stoscanini/.dark-mode-notifier-stdout.log</string>
-
     <key>ProgramArguments</key>
     <array>
-       <string>dark-mode-notifier</string>
+       <string>/usr/local/bin/dark-mode-notifier</string>
        <string>zsh</string>
        <string>/Users/stoscanini/dev/personal/dotfiles/zsh/change-theme.zsh</string>
     </array>
