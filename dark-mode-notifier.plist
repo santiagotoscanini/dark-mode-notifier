@@ -17,8 +17,6 @@
     <key>ProgramArguments</key>
     <array>
        <string>/usr/local/bin/dark-mode-notifier</string>
-       <string>zsh</string>
-       <string>/Users/stoscanini/dev/personal/dotfiles/zsh/change-theme.zsh</string>
     </array>
 </dict>
 </plist>

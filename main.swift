@@ -2,7 +2,7 @@ import Cocoa
 
 // To avoid a compiler warning about calling this function without saving its output
 @discardableResult
-func shell(_ args: [String]) -> Int32 {
+func switchColorSchemes() -> Int32 {
     // Run another program as a subprocess.
     // https://developer.apple.com/documentation/foundation/process
     let task = Process()
@@ -14,7 +14,7 @@ func shell(_ args: [String]) -> Int32 {
 
     task.environment = env
     task.launchPath = "/usr/bin/env"
-    task.arguments = args
+    task.arguments = ["zsh", "/Users/stoscanini/dev/personal/dotfiles/dark-mode-notifier/change-theme.zsh"]
     task.standardError = FileHandle.standardError
     task.standardOutput = FileHandle.standardOutput
     task.launch()
@@ -23,10 +23,8 @@ func shell(_ args: [String]) -> Int32 {
     return task.terminationStatus
 }
 
-let args = Array(CommandLine.arguments.suffix(from: 1))
-
 // First run
-shell(args)
+switchColorSchemes()
 
 // A notification dispatch mechanism that enables the broadcast of notifications across task boundaries.
 // https://developer.apple.com/documentation/foundation/distributednotificationcenter
@@ -36,7 +34,7 @@ DistributedNotificationCenter.default.addObserver(
     forName: Notification.Name("AppleInterfaceThemeChangedNotification"),
     object: nil,
     queue: nil
-) { (notification) in shell(args) }
+) { (notification) in switchColorSchemes() }
 
 // https://developer.apple.com/documentation/appkit/nsworkspace
 NSWorkspace.shared.notificationCenter.addObserver(
@@ -45,7 +43,7 @@ NSWorkspace.shared.notificationCenter.addObserver(
     forName: NSWorkspace.didWakeNotification,
     object: nil,
     queue: nil
-) { (notification) in shell(args) }
+) { (notification) in switchColorSchemes() }
 
 // Every app uses a single instance of NSApplication to control the main event loop
 // https://developer.apple.com/documentation/appkit/nsapplication
