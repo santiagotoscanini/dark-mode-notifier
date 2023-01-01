@@ -19,13 +19,17 @@ function _autoSwitchVimTheme() {
 }
 
 function _autoSwitchDesktopLights() {
-    pushd -q "$HOME/dev/personal/dotfiles/smart-home-automations" || exit
-    if [[ "$DARKMODE" == '1' ]]; then
-        /opt/homebrew/bin/poetry run python3 main.py on
-    else
-        /opt/homebrew/bin/poetry run python3 main.py off
+    # Only turn on/off lights when any of my desktop monitors is connected
+    if system_profiler SPDisplaysDataType -json| /opt/homebrew/bin/jq '.SPDisplaysDataType[0].spdisplays_ndrvs[]._name' | grep -E "Mi Monitor|DELL P2419H"; then
+        echo $(system_profiler SPDisplaysDataType -json| jq '.SPDisplaysDataType[0].spdisplays_ndrvs[]._name' | grep -E "Mi Monitor|DELL P2419H")
+        pushd -q "$HOME/dev/personal/dotfiles/smart-home-automations" || exit
+            if [[ "$DARKMODE" == '1' ]]; then
+                /opt/homebrew/bin/poetry run python3 main.py on
+            else
+                /opt/homebrew/bin/poetry run python3 main.py off
+            fi
+        popd -q || exit
     fi
-    popd -q || exit
 }
 
 # TODO(santiagotoscanini): add more tmux themes
