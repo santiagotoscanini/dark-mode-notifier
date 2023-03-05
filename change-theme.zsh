@@ -1,3 +1,4 @@
+export PATH="/opt/homebrew/bin:$PATH"
 HOME="/Users/stoscanini"
 
 function _change_alacritty_theme() {
