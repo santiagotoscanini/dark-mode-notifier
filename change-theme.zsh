@@ -6,6 +6,8 @@ function _change_alacritty_theme() {
 }
 
 function _autoSwitchAlacrittyTheme() {
+    # TODO: only run if alacritty is running
+    # is_alacritty_running=$(ps aux | grep -v grep | grep Alacritty.app)
     if [[ "$DARKMODE" == '1' ]]; then
         _change_alacritty_theme tokyonight_night
     else
@@ -14,6 +16,7 @@ function _autoSwitchAlacrittyTheme() {
 }
 
 function _autoSwitchVimTheme() {
+    # Send a SIGUSR1 to every vim process, we have an autocmd listening on the other side
     for pid in $(pgrep vim); do
         kill -SIGUSR1 "$pid"
     done
