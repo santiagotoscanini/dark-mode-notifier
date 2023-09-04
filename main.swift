@@ -12,7 +12,7 @@ func switchColorSchemes() -> Int32 {
 
     task.environment = env
     task.launchPath = "/usr/bin/env"
-    task.arguments = ["zsh", "/Users/stoscanini/dev/personal/dotfiles/dark-mode-notifier/change-theme.zsh"]
+    task.arguments = ["zsh", "/Users/stoscanini/dev/personal/dotfiles/os/macos/dark-mode-notifier/change-theme.zsh"]
     task.standardError = FileHandle.standardError
     task.standardOutput = FileHandle.standardOutput
     task.launch()
